@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        .clock {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-top: 10px double blue;
+            border-left: 10px double orange;
+            border-right: 10px double black; 
+            border-bottom: 10px double red;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hand {
+            position: absolute;
+            background-color: pink;
+            top: 50%;
+            margin-right: 80px;
+            transform-origin: 100%;
+            transform: translateY(-50%);
+            transition: all 0.05s ease-in-out;
+        }
+
+        .hour {
+            height: 4px;
+            width: 35%;
+            border-radius: 50%;
+        }
+
+        .minute {
+            height: 4px;
+            width: 45%;
+            border-radius: 50%;
+            border-radius: 50%;
+        }
+
+        .second {
+            height: 4px;
+            border-radius: 50%;
+            width: 46%;
+            margin-left: -1z3px;
+            background-color: blue;
+        }
+
+        .center-circle {
+            background-color: #333;
+            height: 23px;
+            width: 23px;
+            border-radius: 50%;
+            position: absolute;
+            top: 52%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .name {
+            margin-top: 90px;
+            font-weight: bold;
+            z-index: 1;
+            font-size: 23px;
+            text-align: center;
+        }
+
+        .name span {
+            display: inline-block;
+        }
+
+        .name span.red {
+            color: red;
+        }
+
+        .image-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 200px;
+            width: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .image-container img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="clock">
+        <div class="name"><span>Pooja❤️</span> <span class="red">Satish</span></div>
+        <div class="image-container">
+            <img src="images/asas.jpg" alt="error">
+        </div>
+        <div class="center-circle"></div>
+        <div class="hand hour" id="hour"></div>
+        <div class="hand minute" id="minute"></div>
+        <div class="hand second" id="second"></div>
+    </div>
+    <script>
+        function setClock() {
+            const now = new Date();
+            const seconds = now.getSeconds();
+            const minutes = now.getMinutes();
+            const hours = now.getHours();
+
+            const secondHand = document.getElementById('second');
+            const minuteHand = document.getElementById('minute');
+            const hourHand = document.getElementById('hour');
+
+            const secondDegrees = ((seconds / 60) * 360) + 90;
+            const minuteDegrees = ((minutes / 60) * 360) + ((seconds / 60) * 6) + 90;
+            const hourDegrees = ((hours / 12) * 360) + ((minutes / 60) * 30) + 90;
+
+            secondHand.style.transform = `rotate(${secondDegrees}deg)`;
+            minuteHand.style.transform = `rotate(${minuteDegrees}deg)`;
+            hourHand.style.transform = `rotate(${hourDegrees}deg)`;
+        }
+
+        setInterval(setClock, 1000);
+        setClock(); // Initial call to set the clock immediately
+    </script>
+</body>
+</html>
